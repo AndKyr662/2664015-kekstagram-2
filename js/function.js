@@ -26,4 +26,7 @@ const extractNumbers = function (string) {
   return result ? Number(result) : NaN;
 };
 
+checkLength('проверяемая строка', 20);
+checkPolydrome('Лёша на полке клопа нашёл ');
+extractNumbers('1 кефир, 0.5 батона');
 
