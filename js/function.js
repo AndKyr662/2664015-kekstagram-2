@@ -1,8 +1,8 @@
-let checkLength = function (string, maxLength) {
+const checkLength = function (string, maxLength) {
   return string.length <= maxLength;
 };
 
-let checkPolydrome = function (string) {
+const checkPolydrome = function (string) {
   string = string.toLowerCase().replaceAll(' ','');
   let result = true;
   for (let i = 1; i < string.length / 2; i++) {
@@ -14,7 +14,7 @@ let checkPolydrome = function (string) {
   return result;
 };
 
-let extractNumbers = function (string) {
+const extractNumbers = function (string) {
   string = String(string);
   string = string.replaceAll(' ','');
   let result = '';
@@ -25,4 +25,5 @@ let extractNumbers = function (string) {
   }
   return result ? Number(result) : NaN;
 };
+
 
