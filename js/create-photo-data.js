@@ -23,7 +23,7 @@ const getComments = (commentsCount = getRandomInteger(MIN_COMMENTS, MAX_COMMENTS
 const getPhotoCards = () =>
   Array.from({ length: PHOTO_COUNT }, (value, i) => (
     {
-      id: i + 1,
+      id: i,
       url: `photos/${i + 1}.jpg`,
       description: 'Замечательное фото',
       likes: getRandomInteger(MIN_LIKES, MAX_LIKES),

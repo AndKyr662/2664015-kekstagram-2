@@ -1,12 +1,14 @@
 const photosElement = document.querySelector('.pictures');
 const photosFragment = document.createDocumentFragment();
 const photoFragment = document.querySelector('#picture').content;
+const linkElement = photoFragment.querySelector('.picture');
 const imageElement = photoFragment.querySelector('.picture__img');
 const likesElemet = photoFragment.querySelector('.picture__likes');
 const commentsElement = photoFragment.querySelector('.picture__comments');
 
-const renderPhotos = (photos) => {
+const renderMiniPhotos = (photos) => {
   for (const photo of photos) {
+    linkElement.dataset.photoId = photo.id;
     imageElement.src = photo.url;
     imageElement.alt = photo.description;
     commentsElement.textContent = photo.comments.length;
@@ -18,5 +20,5 @@ const renderPhotos = (photos) => {
   photosElement.append(photosFragment);
 };
 
-export { renderPhotos };
+export { renderMiniPhotos, photosElement};
 
