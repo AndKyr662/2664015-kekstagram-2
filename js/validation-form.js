@@ -37,6 +37,7 @@ const isValidHashtagsCount = () => hashtags.length <= MAX_HASHTAGS_COUNT;
 const isValidForm = () => pristine.validate();
 
 const initValidation = () => {
+  commentElement.removeAttribute('maxlength');
   pristine = new Pristine(imageUploadFormElement, {
     classTo: 'img-upload__field-wrapper',
     errorTextParent: 'img-upload__field-wrapper',

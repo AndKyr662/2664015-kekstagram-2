@@ -6,7 +6,7 @@ const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 
 const Route = {
   GET_DATA: '/data',
-  SEND_DATA: '',
+  SEND_DATA: '/',
 };
 
 const Method = {
@@ -24,12 +24,12 @@ const loadData = (renderData) => {
   fetch(`${BASE_URL}${Route.GET_DATA}`)
     .then((response) => {
       if (response.ok) {
+        showFilters(true);
         return response.json();
       }
       addErrorMessage();
     })
     .then((data) => {
-      showFilters(true);
       photosArray = data;
       return getPhotos(data);
     })

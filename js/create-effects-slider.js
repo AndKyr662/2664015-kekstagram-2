@@ -1,5 +1,6 @@
-const sliderElement = document.querySelector('.img-upload__effect-level');
-const sliderInputElement = sliderElement.querySelector('.effect-level__value');
+const sliderContainerElement = document.querySelector('.img-upload__effect-level');
+const sliderInputElement = sliderContainerElement.querySelector('.effect-level__value');
+const sliderElement = sliderContainerElement.querySelector('.effect-level__slider');
 const photoElement = document.querySelector('.img-upload__preview img');
 
 const effects = [
@@ -67,18 +68,18 @@ const createSlider = () => {
 };
 
 function hideSlider () {
-  sliderElement.classList.add('visually-hidden');
-  sliderElement.setAttribute('disabled', true);
+  sliderContainerElement.classList.add('hidden');
+  sliderContainerElement.setAttribute('disabled', true);
   photoElement.style.filter = 'none';
 }
 
 const showSlider = () => {
-  sliderElement.classList.remove('visually-hidden');
-  sliderElement.removeAttribute('disabled');
+  sliderContainerElement.classList.remove('hidden');
+  sliderContainerElement.removeAttribute('disabled');
   sliderElement.noUiSlider.on('update', () => {
     const sliderValue = `${sliderElement.noUiSlider.get()}${currentEffectData.measure}`;
     photoElement.style.filter = `${currentEffectData.filter}(${sliderValue})`;
-    sliderInputElement.setAttribute('value', sliderElement.noUiSlider.get());
+    sliderInputElement.setAttribute('value', +sliderElement.noUiSlider.get());
   });
 };
 

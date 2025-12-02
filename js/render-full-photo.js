@@ -10,6 +10,7 @@ const photoDescriptionElement = fullPhotoElement.querySelector('.social__caption
 const onCloseButtonKeydownEsc = (evt) => {
   if (evt.keyCode === 27) {
     evt.preventDefault();
+    hidePopup();
   }
 };
 
