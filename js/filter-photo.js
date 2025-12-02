@@ -53,10 +53,11 @@ const applyFilter = () => {
 const debouncedApplyFilter = debounce(applyFilter, FILTER_TIMEOUT);
 
 const onButtonClick = (evt) => {
-  if (evt.target.closest('.img-filters__button')){
+  const button = evt.target.closest('.img-filters__button');
+  if (button){
     currentButton.classList.remove('img-filters__button--active');
-    currentButton = evt.target;
-    currentButton.classList.add('img-filters__button--active');
+    button.classList.add('img-filters__button--active');
+    currentButton = button;
     currentFilter = currentButton.id;
     debouncedApplyFilter();
   }
@@ -64,12 +65,12 @@ const onButtonClick = (evt) => {
 
 const showFilters = (isNeedShow) => {
   if (isNeedShow) {
+    buttonsElement.addEventListener('click', onButtonClick);
     filtersElement.classList.remove('img-filters--inactive');
   } else {
+    buttonsElement.removeEventListener('click', onButtonClick);
     filtersElement.classList.add('img-filters--inactive');
   }
-
-  filtersElement.addEventListener('click', onButtonClick);
 };
 
 export { showFilters, getPhotos };

@@ -47,14 +47,13 @@ const swapPhoto = (photo) => {
   });
 };
 
-const showModal = (file) => {
+const showModal = () => {
   imageEditingPopupElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
   closeFormElement.addEventListener('click', onCloseButtonClick, {once: true});
   document.addEventListener('keydown', onCloseButtonKeydownEsc);
   imageUploadTextElement.addEventListener('keydown', onBreakHidePopup);
   initValidation();
-  swapPhoto(file);
   imageUploadFormElement.addEventListener('submit', onSubmitForm);
   addEditPhotoListener();
 };
@@ -74,7 +73,8 @@ const onChangeInput = () => {
   const file = imageUploadInputElement.files[0];
   const fileName = file.name.toLowerCase();
   if (PHOTO_TYPES.some((format) => fileName.endsWith(format))) {
-    showModal(file);
+    swapPhoto(file);
+    showModal();
   }
 };
 
