@@ -7,6 +7,10 @@ const likesElemet = photoFragment.querySelector('.picture__likes');
 const commentsElement = photoFragment.querySelector('.picture__comments');
 
 const renderMiniPhotos = (photos) => {
+  const currentPhotoElements = photosElement.querySelectorAll('.picture');
+  if (currentPhotoElements) {
+    currentPhotoElements.forEach((element) => element.remove());
+  }
   for (const photo of photos) {
     linkElement.dataset.photoId = photo.id;
     imageElement.src = photo.url;

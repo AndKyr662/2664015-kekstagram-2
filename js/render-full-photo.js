@@ -1,5 +1,6 @@
 import { renderComments } from './render-comments.js';
 
+const photosElement = document.querySelector('.pictures');
 const fullPhotoElement = document.querySelector('.big-picture');
 const fullImageElement = fullPhotoElement.querySelector('.big-picture__img img');
 const likesCountElement = fullPhotoElement.querySelector('.likes-count');
@@ -45,8 +46,8 @@ const onPhotosClick = (evt, photosData) => {
   }
 };
 
-const initListenerFullPhoto = (photosData, miniPhotosElement) => {
-  miniPhotosElement.addEventListener('click', (evt) => onPhotosClick (evt, photosData));
+const initListenerFullPhoto = (photosData) => {
+  photosElement.addEventListener('click', (evt) => onPhotosClick (evt, photosData));
 };
 
 export { initListenerFullPhoto };

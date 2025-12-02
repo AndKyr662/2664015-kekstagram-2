@@ -1,6 +1,8 @@
 import { createSlider, updateSlider, removeSlider } from './create-effects-slider.js';
 
 const SCALE_STEP = 0.25;
+const SCALE_MIN = 0.25;
+const SCALE_MAX = 1;
 const SCALE_SMALLER_SELECTOR = '.scale__control--smaller';
 const SCALE_BIGGER_SELECTOR = '.scale__control--bigger';
 
@@ -9,13 +11,13 @@ const scaleValueElement = photoScaleElement.querySelector('.scale__control--valu
 const photoElement = document.querySelector('.img-upload__preview img');
 const effectsElement = document.querySelector('.effects__list');
 
-let scaleValue = scaleValueElement.value.slice(0, -1) / 100;
+let scaleValue = SCALE_MAX;
 
 const scalePhoto = (evt) => {
   if (evt.target.closest(SCALE_SMALLER_SELECTOR)) {
-    scaleValue = scaleValue < SCALE_STEP * 2 ? scaleValue : scaleValue - SCALE_STEP;
+    scaleValue = scaleValue < SCALE_MIN * 2 ? scaleValue : scaleValue - SCALE_STEP;
   } else if (evt.target.closest(SCALE_BIGGER_SELECTOR)) {
-    scaleValue = scaleValue > 1 - SCALE_STEP ? scaleValue : scaleValue + SCALE_STEP;
+    scaleValue = scaleValue > 1 - SCALE_MIN ? scaleValue : scaleValue + SCALE_STEP;
   }
 
   scaleValueElement.setAttribute('value', `${scaleValue * 100}%`);
@@ -35,7 +37,9 @@ const addEditPhotoListener = () => {
 };
 
 const removeEditPhotoListener = () => {
-  photoScaleElement.addEventListener('click', scalePhoto);
+  scaleValue = SCALE_MAX;
+  scaleValueElement.setAttribute('value', `${scaleValue * 100}%`);
+  photoScaleElement.removeEventListener('click', scalePhoto);
   effectsElement.removeEventListener('click', changeEffect);
   removeSlider();
 };

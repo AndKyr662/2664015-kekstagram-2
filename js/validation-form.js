@@ -13,20 +13,28 @@ let pristine;
 let hashtags = [];
 
 const getHashtags = (text) => text.trim().split(' ').filter((word) => word !== '');
+
 const validateCommentLength = (value) => value.length <= MAX_COMMENT_LENGTH;
+
 const isStartsWithHash = () => {
   hashtags = getHashtags(hashtagElement.value);
   hashtags = hashtags.map((hashtag) => hashtag.toLowerCase());
   const isFirstHash = hashtags.every((hashtag) => startHashRegExp.test(hashtag));
   return isFirstHash;
 };
+
 const isValidHashtagFormat = () => hashtags.every((hashtag) => hashtagRegExp.test(hashtag));
+
 const isValidHashtagLength = () => hashtags.every((hashtag) => hashtag.length >= MIN_HASHTAG_LENGTH && hashtag.length <= MAX_HASHTAG_LENGTH);
+
 const hasNoDuplicates = () => {
   const uniqueHashtags = new Set (hashtags);
   return uniqueHashtags.size === hashtags.length;
 };
+
 const isValidHashtagsCount = () => hashtags.length <= MAX_HASHTAGS_COUNT;
+
+const isValidForm = () => pristine.validate();
 
 const initValidation = () => {
   pristine = new Pristine(imageUploadFormElement, {
@@ -41,15 +49,10 @@ const initValidation = () => {
   pristine.addValidator(hashtagElement, isValidHashtagFormat, 'После символа # хэштег должен состоять только из букв и чисел', 1, true);
   pristine.addValidator(hashtagElement, hasNoDuplicates, 'Нельзя использовать одинаковые хэштеги', 1, true);
   pristine.addValidator(hashtagElement, isValidHashtagsCount, `Нельзя использовать более ${MAX_HASHTAGS_COUNT} хэштегов`, 1, true);
-
-  imageUploadFormElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    pristine.validate();
-  });
 };
 
 const removeValidation = () => {
   pristine.destroy();
 };
 
-export { initValidation, removeValidation };
+export { initValidation, removeValidation, isValidForm };

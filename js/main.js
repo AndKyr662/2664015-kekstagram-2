@@ -1,11 +1,12 @@
-import { getPhotoCards } from './create-photo-data.js';
-import { renderMiniPhotos, photosElement } from './render-mini-photos.js';
+import { loadData } from './api.js';
+import { renderMiniPhotos } from './render-mini-photos.js';
 import { initListenerFullPhoto } from './render-full-photo.js';
 import { initListenerDownloadPhoto } from './show-photo-editor.js';
-import './edit-photo.js';
 
-const photosData = getPhotoCards();
+const renderPage = (data) => {
+  renderMiniPhotos(data);
+  initListenerFullPhoto(data);
+  initListenerDownloadPhoto();
+};
 
-renderMiniPhotos(photosData);
-initListenerFullPhoto(photosData, photosElement);
-initListenerDownloadPhoto();
+loadData(renderPage);
